@@ -44,12 +44,14 @@ createApp({
         } else {
           alert(res.data.message);
         }
+      }).catch(error=>{
+        alert(error.data.message);
       })
     },
     updateProduct() {
       let url = `${this.apiUrl}/${this.apiPath}/admin/product`;
       let method = 'post';
-  
+      
       if(!this.isNew) {
         url = `${this.apiUrl}/${this.apiPath}/admin/product/${this.tempProduct.id}`;
         method = 'put'
@@ -63,6 +65,8 @@ createApp({
         } else {
           alert(res.data.message);
         }
+      }).catch(error=>{
+        alert(error.data.message);
       })
     },
     openModal(isNew, item) {
@@ -82,6 +86,13 @@ createApp({
         delProductModal.show();
       }
     },
+    activeProduct(id){
+      this.products.forEach(item=>{
+        if(id == item.id){
+          item.is_enabled = !item.is_enabled;
+        }
+      })
+    },  
     delProduct() {
       const url = `${this.apiUrl}/${this.apiPath}/admin/product/${this.tempProduct.id}`;
       axios.delete(url).then((res) => {
@@ -92,6 +103,8 @@ createApp({
         } else {
           alert(res.data.message);
         }
+      }).catch(error=>{
+        alert(error.data.message);
       });
     },
     createImages() {
